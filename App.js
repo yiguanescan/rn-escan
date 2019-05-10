@@ -11,6 +11,8 @@ import {Platform, StyleSheet, Text, View} from 'react-native';
 import {StackNavigator} from 'react-navigation';
 import { Button, ThemeProvider } from 'react-native-elements';
 import  Login from './component/login'
+import  Index from './component/index'
+import  IndexTop from './component/inT_B'
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
   android:

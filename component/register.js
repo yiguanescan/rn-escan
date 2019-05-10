@@ -4,6 +4,7 @@ import {StackNavigator,createAppContainer,createStackNavigator,createSwitchNavig
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Button, ThemeProvider } from 'react-native-elements';
 import reg_log from "./reg_log";
+import Index from '../component/inT_B'
 
 class registerScreen extends React.Component {
     render() {
@@ -25,14 +26,15 @@ class registerScreen extends React.Component {
                     <TextInput style={styles.loginPwd}
                                placeholder="密码"
                                editable={true}//是否可编辑
+                               secureTextEntry={true}
                                underlineColorAndroid='#E5E5E5'
                     />
                     <TextInput style={styles.loginPwd}
                                placeholder="确认密码"
                                editable={true}//是否可编辑
+                               secureTextEntry={true}
                                underlineColorAndroid='#E5E5E5'
                     />
-
                 </View>
                 <ThemeProvider>
                     <Button
@@ -46,6 +48,7 @@ class registerScreen extends React.Component {
                             marginLeft: '10%',
                             marginTop: 15
                         }}
+                        onPress={() =>this.props.navigation.navigate('index')}
                     />
                 </ThemeProvider>
                 <TouchableOpacity style={styles.titleReg}
@@ -64,9 +67,8 @@ class registerScreen extends React.Component {
 const aa = createSwitchNavigator(
     {
         register:registerScreen,
-
         goLogin:reg_log,
-
+       index:Index
     },{
         initialRouteName: 'register',
     });

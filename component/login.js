@@ -4,6 +4,7 @@ import {StackNavigator,createAppContainer,createStackNavigator,createSwitchNavig
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Button, ThemeProvider } from 'react-native-elements';
 import RegisterScreen from '../component/register';
+import InTopB from '../component/inT_B';
 
  class loginScreen extends React.Component {
 
@@ -23,7 +24,7 @@ import RegisterScreen from '../component/register';
     }
     //点击登录事件
     userLogin(){
-        let url = "http://localhost:8080/index";
+        let url = "http://localhost:8081/escan/component/index";
         const init ={
             method: "POST",
             header:{
@@ -38,7 +39,7 @@ import RegisterScreen from '../component/register';
 
             })
             .catch(e =>{
-                alert('error',${e});
+                /*alert('error',${e});*/
             })
     }
 
@@ -71,17 +72,18 @@ import RegisterScreen from '../component/register';
                     />
                     <TextInput style={styles.loginPwd}
                                placeholder="密码"
+                               secureTextEntry={true}
                                editable={true}//是否可编辑
                                underlineColorAndroid='#E5E5E5'
                                onChangeText={(inputValue) =>this._onChangePasswordText(inputValue)}
                     />
-
                 </View>
                 <ThemeProvider >
                     <Button
                         title="登&nbsp;&nbsp;&nbsp;&nbsp;录"
                         buttonStyle={{borderRadius:5, height:50,width:'80%',justifyContent:'center' , alignItems:'center',marginLeft:'10%', marginTop: 15}}
-                        onPress={() =>this.userLogin()}
+                        /*onPress={() =>this.userLogin()}*/
+                        onPress={() =>this.props.navigation.navigate('index')}
                     />
                 </ThemeProvider>
                     <TouchableOpacity style={styles.titleReg}
@@ -91,6 +93,20 @@ import RegisterScreen from '../component/register';
                         <Text style={{color:'#63B8FF'}}
                               >注册</Text>
                     </TouchableOpacity>
+                <View style={{justifyContent: 'center', alignItems: 'center',flex: 1,flexDirection: 'row',marginTop:'20%'}}>
+                    <Image
+                        source={require('./static/images/qq.png')}
+                        style={{width: 40, height: 40, justifyContent: 'center', alignItems: 'center',marginLeft:30,marginRight:30}}
+                    />
+                    <Image
+                        source={require('./static/images/weixin.png')}
+                        style={{width: 40, height: 40, justifyContent: 'center', alignItems: 'center',marginLeft:30,marginRight:30}}
+                    />
+                    <Image
+                        source={require('./static/images/weibo.png')}
+                        style={{width: 40, height: 40, justifyContent: 'center', alignItems: 'center',marginLeft:30,marginRight:30}}
+                    />
+                </View>
             </View>
         /*<View style={styles.titleBody}>this.props.navigation.navigate('Registers')*/
         );
@@ -100,7 +116,8 @@ import RegisterScreen from '../component/register';
 const App = createSwitchNavigator(
     {
         login: loginScreen,
-        Registers:RegisterScreen
+        Registers:RegisterScreen,
+        index:InTopB
     },{
     initialRouteName: 'login',
 });

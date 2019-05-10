@@ -1,8 +1,5 @@
 import React, {Component} from 'react';
 import {AppRegistry,Platform,Alert, StyleSheet, Text, View,TextInput,TouchableHighlight,TouchableOpacity,Image} from 'react-native';
-import {StackNavigator,createAppContainer,createStackNavigator,createSwitchNavigator,NavigationActions,StackActions} from 'react-navigation';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import { Button, ThemeProvider } from 'react-native-elements';
 import  Login from '../component/login'
 
 export default class reg_log extends React.Component {
