@@ -4,6 +4,7 @@ import {createAppContainer,createStackNavigator} from 'react-navigation';
 import { Button} from 'react-native-elements';
 import RegisterScreen from '../component/register';
 import InTopB from '../component/inT_B';
+import Global from  './Global';
 
  class loginScreen extends React.Component {
 
@@ -23,21 +24,30 @@ import InTopB from '../component/inT_B';
     }
     //点击登录事件
     userLogin(){
-        let url = "http://localhost:8081/escan/component/index";
+        let url = Global.adminPath + "/login";
+        let postData = {
+            'userName': this.state.userName,
+            'password': this.state.password
+        };
+        console.log(url);
         const init ={
             method: "POST",
-            header:{
-                'Accept':'application:json',
-                'Content-Type':'application:json'
-            }
+            headers:{
+                'Accept':'application/json',
+                'Content-Type':'application/json;charset=UTF-8'
+            },
+            body: JSON.stringify(postData)
         };
+        console.log(JSON.stringify(postData));
         fetch(url,init)
             .then((response)=>response.json())
             .then((responseJson)=>{
-
+                alert(JSON.stringify(responseJson));
+                this.props.navigation.navigate('index');
             })
             .catch(e =>{
                 /*alert('error',${e});*/
+                console.log(e);
             })
     }
 
@@ -80,7 +90,7 @@ import InTopB from '../component/inT_B';
                     <Button
                         title="登&nbsp;&nbsp;&nbsp;&nbsp;录"
                         buttonStyle={{borderRadius:5, height:50,width:'80%',justifyContent:'center' , alignItems:'center',marginLeft:'10%', marginTop: 15}}
-                        onPress={() =>this.props.navigation.navigate('index')}
+                        onPress={() =>this.userLogin()}
                     />
                 </TouchableOpacity>
                     <TouchableOpacity style={styles.titleReg}
