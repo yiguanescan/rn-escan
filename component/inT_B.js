@@ -1,11 +1,8 @@
+import React from 'react';
+import {StyleSheet,View} from 'react-native';
 
-import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
-import {StackNavigator} from 'react-navigation';
-import { Button, ThemeProvider } from 'react-native-elements';
-
-import  IndexTop from './indexTop'
-import  Index from './index'
+import  IndexTop from './indexTop';
+import  Index from './index';
 
 export default class inT_B extends React.Component {
     render() {

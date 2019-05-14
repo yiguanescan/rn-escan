@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
-import {AppRegistry,Platform,Alert, StyleSheet, Text, View,TextInput,TouchableHighlight,TouchableOpacity,Image} from 'react-native';
-import  Login from '../component/login'
+import React from 'react';
+import {StyleSheet,View} from 'react-native';
+import  Login from '../component/login';
 
 export default class reg_log extends React.Component {
     render() {
@@ -8,7 +8,6 @@ export default class reg_log extends React.Component {
             <View style={styles.container}>
                 <Login/>
             </View>
-            /*this.props.navigation.navigate('Logins')*/
         );
     }
 }
