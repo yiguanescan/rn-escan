@@ -4,7 +4,7 @@ import {StackNavigator,createAppContainer,createStackNavigator,createSwitchNavig
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Button, ThemeProvider } from 'react-native-elements';
 import reg_log from "./reg_log";
-import Index from '../component/inT_B'
+import Index from '../component/inT_B';
 
 class registerScreen extends React.Component {
     render() {
@@ -52,7 +52,7 @@ class registerScreen extends React.Component {
                     />
                 </ThemeProvider>
                 <TouchableOpacity style={styles.titleReg}
-                                  onPress={() =>this.props.navigation.navigate('goLogin')}
+                                  onPress={() =>this.props.navigation.popToTop()}
                                   underlineColorAndroid="white"
                 >
                     <Text style={{color: '#63B8FF'}}
@@ -64,13 +64,32 @@ class registerScreen extends React.Component {
     }
 }
 
-const aa = createSwitchNavigator(
+const aa = createStackNavigator(
     {
-        register:registerScreen,
-        goLogin:reg_log,
-       index:Index
+        register:{
+            screen:registerScreen,
+            navigationOptions: {  // 屏幕导航的默认选项, 也可以在组件内用 static navigationOptions 设置(会覆盖此处的设置)
+                header: null,  //隐藏导航栏
+            }
+        },
+        goLogin:{
+            screen:reg_log,
+            navigationOptions: {  // 屏幕导航的默认选项, 也可以在组件内用 static navigationOptions 设置(会覆盖此处的设置)
+                tabBarVisible: false, // 隐藏底部导航栏
+                header: null,  //隐藏导航栏
+            }
+        },
+        index:{
+            screen:Index,
+            navigationOptions: {  // 屏幕导航的默认选项, 也可以在组件内用 static navigationOptions 设置(会覆盖此处的设置)
+                header: null,  //隐藏导航栏
+            }
+        }
     },{
         initialRouteName: 'register',
+        navigationOptions:{
+            header:null,
+        },
     });
 
 const App = createAppContainer(aa);

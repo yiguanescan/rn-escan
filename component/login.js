@@ -1,8 +1,7 @@
-import React, {Component} from 'react';
-import {AppRegistry,Platform,Alert, StyleSheet, Text, View,TextInput,TouchableHighlight,TouchableOpacity,Image} from 'react-native';
-import {StackNavigator,createAppContainer,createStackNavigator,createSwitchNavigator} from 'react-navigation';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import { Button, ThemeProvider } from 'react-native-elements';
+import React from 'react';
+import {StyleSheet, Text, View,TextInput,TouchableOpacity,Image} from 'react-native';
+import {createAppContainer,createStackNavigator} from 'react-navigation';
+import { Button} from 'react-native-elements';
 import RegisterScreen from '../component/register';
 import InTopB from '../component/inT_B';
 
@@ -31,7 +30,6 @@ import InTopB from '../component/inT_B';
                 'Accept':'application:json',
                 'Content-Type':'application:json'
             }
-
         };
         fetch(url,init)
             .then((response)=>response.json())
@@ -78,18 +76,17 @@ import InTopB from '../component/inT_B';
                                onChangeText={(inputValue) =>this._onChangePasswordText(inputValue)}
                     />
                 </View>
-                <ThemeProvider >
+                <TouchableOpacity >
                     <Button
                         title="登&nbsp;&nbsp;&nbsp;&nbsp;录"
                         buttonStyle={{borderRadius:5, height:50,width:'80%',justifyContent:'center' , alignItems:'center',marginLeft:'10%', marginTop: 15}}
-                        /*onPress={() =>this.userLogin()}*/
                         onPress={() =>this.props.navigation.navigate('index')}
                     />
-                </ThemeProvider>
+                </TouchableOpacity>
                     <TouchableOpacity style={styles.titleReg}
                                         onPress={() =>this.props.navigation.navigate('Registers')}
                                         underlineColorAndroid="white"
-                                        >
+                                        >{/*{() =>this.props.navigation.navigate('Registers')}*/}
                         <Text style={{color:'#63B8FF'}}
                               >注册</Text>
                     </TouchableOpacity>
@@ -108,22 +105,37 @@ import InTopB from '../component/inT_B';
                     />
                 </View>
             </View>
-        /*<View style={styles.titleBody}>this.props.navigation.navigate('Registers')*/
         );
     }
 }
 
-const App = createSwitchNavigator(
+const App = createStackNavigator(
     {
-        login: loginScreen,
-        Registers:RegisterScreen,
-        index:InTopB
+        login: {
+            screen:loginScreen,
+            navigationOptions: {  // 屏幕导航的默认选项, 也可以在组件内用 static navigationOptions 设置(会覆盖此处的设置)
+                header: null,  //隐藏导航栏
+            }
+        },
+        Registers:{
+            screen:RegisterScreen,
+            navigationOptions: {  // 屏幕导航的默认选项, 也可以在组件内用 static navigationOptions 设置(会覆盖此处的设置)
+                header: null,  //隐藏导航栏
+            }
+        },
+        index:{
+            screen:InTopB,
+            navigationOptions: {  // 屏幕导航的默认选项, 也可以在组件内用 static navigationOptions 设置(会覆盖此处的设置)
+                header: null,  //隐藏导航栏
+            }
+        }
     },{
     initialRouteName: 'login',
 });
+
 const AppContainer = createAppContainer(App);
 export default class login extends React.Component {
-    render() {
+   render() {
         return <AppContainer />;
     }
 }

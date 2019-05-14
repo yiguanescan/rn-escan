@@ -1,11 +1,12 @@
-import React, {Component} from 'react';
-import {Platform,
+import React from 'react';
+import {
         StyleSheet,
-        AppRegistry,
         Text,
         View,
         Image} from 'react-native';
-import {StackNavigator, TabBarBottom, TabNavigator, createStackNavigator, createAppContainer,createBottomTabNavigator} from 'react-navigation';
+import {createAppContainer,createBottomTabNavigator} from 'react-navigation';
+import HomeScreen from '../component/home'
+import MyPages from '../component/myPage'
 
 class Home extends React.Component{
     static navigationOptions = {
@@ -19,9 +20,7 @@ class Home extends React.Component{
     };
     render() {
         return (
-            <View style={styles.container}>
-                <Text>这是首页</Text>
-            </View>
+               <HomeScreen/>
         );
     }
 }
@@ -55,9 +54,7 @@ class MyPage extends React.Component{
     };
     render() {
         return (
-            <View style={styles.container}>
-                <Text>这是我的</Text>
-            </View>
+            <MyPages/>
         );
     }
 }

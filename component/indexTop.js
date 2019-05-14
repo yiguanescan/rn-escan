@@ -1,11 +1,8 @@
-import React, {Component} from 'react';
-import {Platform,
+import React from 'react';
+import {
     StyleSheet,
-    AppRegistry,
     Text,
-    View,
-    Image} from 'react-native';
-import {TabNavigator} from 'react-navigation';
+    View} from 'react-native';
 
 export default class indexTop extends React.Component{
     /**
