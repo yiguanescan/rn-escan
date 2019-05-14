@@ -7,6 +7,7 @@ import {
 import {createAppContainer,createBottomTabNavigator} from 'react-navigation';
 import HomeScreen from '../component/home'
 import MyPages from '../component/myPage'
+import Pact from '../component/pact'
 
 class Home extends React.Component{
     static navigationOptions = {
@@ -70,9 +71,7 @@ class Contract extends React.Component{
     };
     render(){
         return(
-            <View style={styles.container}>
-                <Text>这是合同</Text>
-            </View>
+           <Pact/>
         )
     }
 }
