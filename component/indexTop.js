@@ -31,13 +31,14 @@ export default class indexTop extends React.Component{
         }
     }
     render() {
-        const {centerText,lineHeight,backgroundColor} = this.state;
+        const {centerText,lineHeight,backgroundColor,leftPress} = this.state;
         return (
             <View >
                 <View style={{
                     height:50,
                     borderBottomWidth: lineHeight,
-                    backgroundColor:backgroundColor
+                    backgroundColor:backgroundColor,
+                    leftPress:leftPress
                 }}>
                     <View style={styles.containerText}>
                         <Text style={styles.titleBody}>{centerText}</Text>

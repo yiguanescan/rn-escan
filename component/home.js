@@ -8,7 +8,6 @@ import {
     SectionList,
     ScrollView,
     Image} from 'react-native';
-import {createAppContainer,createBottomTabNavigator} from 'react-navigation';
 
 export default class home extends React.Component{
     render(){
@@ -178,7 +177,7 @@ export default class home extends React.Component{
 const styles = StyleSheet.create({
     newHetong:{
         backgroundColor:'white',
-        height:100,
+        height:90,
         width:'94%',
         marginTop:15,
         marginLeft:'3%',
@@ -192,7 +191,7 @@ const styles = StyleSheet.create({
     details:{
         flexDirection:'row',
         justifyContent: 'space-between',
-        marginTop:20,
+        marginTop:18,
     },
     dataName:{
         marginLeft:15
@@ -207,7 +206,7 @@ const styles = StyleSheet.create({
         marginLeft:15
     },
     hetongtit:{
-        marginTop:15,
+        marginTop:12,
         flexDirection:'row',
         justifyContent: 'space-between',
     },
