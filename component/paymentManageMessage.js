@@ -19,6 +19,7 @@ import {createAppContainer,createStackNavigator} from 'react-navigation';
 import LoadingImage from "../component/loadingImage";
 import Swipeout from 'react-native-swipeout'
 import PaymentInformation from '../component/paymentInformation'
+import BillingInformationDetails from '../component/billingInformationDetails'
 
 const CITY_NAMES = ['北京', '上海', '广州','杭州', '苏州'];
 const list = [
@@ -264,7 +265,7 @@ class paymentManageMeg extends React.Component{
                     <Swipeout
                         backgroundColor={'white'}
                         right={swipeOut}>
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={() =>this.props.navigation.navigate('BillingInDetails')}>
                             <View style={styles.swipeOutS}>
                                 <View style={styles.payList}>
                                     <Image source={require('./static/images/票.png')}
@@ -353,6 +354,12 @@ const App = createStackNavigator(
         PaymentIn: {
             screen:PaymentInformation,
             headerMode:'float',
+            navigationOptions: {  // 屏幕导航的默认选项, 也可以在组件内用 static navigationOptions 设置(会覆盖此处的设置)
+                header: null,  //隐藏导航栏
+            }
+        },
+        BillingInDetails:{
+            screen:BillingInformationDetails,
             navigationOptions: {  // 屏幕导航的默认选项, 也可以在组件内用 static navigationOptions 设置(会覆盖此处的设置)
                 header: null,  //隐藏导航栏
             }
