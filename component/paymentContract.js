@@ -79,13 +79,18 @@ const App = createStackNavigator(
                 headerTintColor:'#2A9BFF',
                 headerTitleStyle:{
                     fontSize:15
-                }
+                },
+                gesturesEnabled: false,
+                gestures: null
             }
         },
         panyMent:{
             screen:panyment,
             navigationOptions: {  // 屏幕导航的默认选项, 也可以在组件内用 static navigationOptions 设置(会覆盖此处的设置)
-                header: null,  //隐藏导航栏
+                header: null,  //隐藏导航栏,
+                gesturesEnabled: false,
+                gestures: null
+
             }
         },
     },{
@@ -109,7 +114,7 @@ const styles = StyleSheet.create({
         flexDirection:'column',
         elevation: 5,
         shadowOffset: {width: 0, height: 0},
-        shadowColor: 'black',
+        shadowColor: 'grey',
         shadowOpacity: 10,
         shadowRadius: 3,
         marginBottom: 10

@@ -90,7 +90,7 @@ import Global from  './Global';
                     <Button
                         title="登&nbsp;&nbsp;&nbsp;&nbsp;录"
                         buttonStyle={{borderRadius:5, height:50,width:'80%',justifyContent:'center' , alignItems:'center',marginLeft:'10%', marginTop: 15}}
-                        onPress={() =>this.userLogin()}
+                        onPress={() =>this.props.navigation.navigate('index')}
                     />
                 </TouchableOpacity>
                     <TouchableOpacity style={styles.titleReg}

@@ -25,8 +25,11 @@ export default class pact extends React.Component{
                 tabBarUnderlineStyle={{backgroundColor:'#2a9bff',height:1}}   //下划线的样式
                 renderTabBar={() => <ScrollableTabBar style={{height: 40,borderWidth:0,elevation:2}} tabStyle={{height: 39}}
                                                       underlineHeight={2}/>}
+                locked={true}
             >
-                <PayContract tabLabel="付款合同" />
+                <PayContract
+
+                    tabLabel="付款合同" />
                 <PaymentDrawer tabLabel="付款开票" />
                 <PaymentManage tabLabel="付款管理" />
                 <GatContract tabLabel="收款合同" />

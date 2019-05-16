@@ -81,7 +81,7 @@ export default class home extends React.Component{
                    <View style={{height:85,backgroundColor:'#DEDEDE',marginBottom: 15}}/>
                 </View>
                 <View>
-                    <View style={{marginTop:15,flexDirection:'row',}}>
+                    <View style={{marginTop:10,flexDirection:'row',}}>
                         <View style={{width:5,height:18,marginRight: 15,backgroundColor:'#2a9bff'}}/>
                         <Text style={{color:"#393939"}}>最新合同</Text>
                     </View>
@@ -218,10 +218,10 @@ const styles = StyleSheet.create({
         backgroundColor:'white',
     },
     hetongguanli:{
-        width:60,
-        height:60,
+        width:70,
+        height:70,
         marginLeft:15,
-        marginRight:15,
+        marginRight:20,
         marginBottom:10,
         marginTop:15,
 
@@ -234,8 +234,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     h_image:{
-        width:50,
-        height:50,
+        width:60,
+        height:60,
         marginLeft:'8%'
     }
 })
