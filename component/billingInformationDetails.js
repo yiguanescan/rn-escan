@@ -6,8 +6,11 @@ import {
     TouchableOpacity,
     ListView,
     SectionList,
-    Alert,Dimensions,
-    Image, TextInput,ScrollView
+    Alert,
+    Dimensions,
+    Image,
+    TextInput,
+    ScrollView
 } from 'react-native';
 var {width,height} = Dimensions.get("window");//第一种写法
 export default class billingInformationDetails extends React.Component{
@@ -92,7 +95,6 @@ export default class billingInformationDetails extends React.Component{
                             </View>
                         </View>
                         <View style={{backgroundColor:'white',marginTop:10}}>
-
                             <View>
                                 <Image source={require('./static/images/hetong1jpg.jpg')}
                                        resizeMode ='contain'

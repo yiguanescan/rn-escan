@@ -73,7 +73,7 @@ import com.android.build.OutputFile
  */
 
 project.ext.react = [
-    entryFile: "index.js"
+    entryFile: "indexBottomBottom.js"
 ]
 
 apply from: "../../node_modules/react-native/react.gradle"
@@ -136,7 +136,9 @@ android {
         }
     }
 }
-
+dependencies {
+    compile project(':react-native-image-picker')
+}
 dependencies {
     implementation project(':react-native-vector-icons')
     implementation project(':react-native-linear-gradient')

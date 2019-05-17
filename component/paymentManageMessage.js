@@ -20,6 +20,7 @@ import LoadingImage from "../component/loadingImage";
 import Swipeout from 'react-native-swipeout'
 import PaymentInformation from '../component/paymentInformation'
 import BillingInformationDetails from '../component/billingInformationDetails'
+import PaymentContractUpdate from '../component/paymentContractUpdate'
 
 const CITY_NAMES = ['北京', '上海', '广州','杭州', '苏州'];
 const list = [
@@ -77,6 +78,18 @@ class paymentManageMeg extends React.Component{
         return(
             <View style={{flex:1,backgroundColor:'#eeeeee'}}>
                 <ScrollView>
+                    <View style={{flexDirection:'row',justifyContent:'space-between'}}>
+                        <View style={{marginTop:15,flexDirection:'row',}}>
+                            <View style={{width:5,height:18,marginRight: 15,backgroundColor:'#2a9bff'}}/>
+                            <Text style={{color:"#393939"}}>基本信息</Text>
+                        </View>
+                        <TouchableOpacity
+                            onPress={()=>this.props.navigation.navigate('PaymentContractUpdate')}
+                            style={{marginTop:15,marginRight:'4%'}}>
+                            <Image source={require('./static/images/xiugai.png')}
+                                   style={{height:20,width:20}}/>
+                        </TouchableOpacity>
+                    </View>
                 <View style={styles.basicInformation}>
                     <View style={styles.details}>
                         <Text style={styles.detailsLeft}>
@@ -354,6 +367,12 @@ const App = createStackNavigator(
         PaymentIn: {
             screen:PaymentInformation,
             headerMode:'float',
+            navigationOptions: {  // 屏幕导航的默认选项, 也可以在组件内用 static navigationOptions 设置(会覆盖此处的设置)
+                header: null,  //隐藏导航栏
+            }
+        },
+        PaymentContractUpdate:{
+            screen:PaymentContractUpdate,
             navigationOptions: {  // 屏幕导航的默认选项, 也可以在组件内用 static navigationOptions 设置(会覆盖此处的设置)
                 header: null,  //隐藏导航栏
             }
