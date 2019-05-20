@@ -9,7 +9,6 @@ import {
     Dimensions,
     TouchableOpacity,
     PixelRatio,
-    WebView,
     Modal,
     ImageBackground,
     Alert,
@@ -233,12 +232,18 @@ export default class paymentContractUpdate extends React.Component{
         modalVisible: true
     };
     magnifyImage(images){
-        const html = `<img src="${images}" style="width:100%;height:auto;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);"/>`;
-        xianshi=(<View style={{flex: 1}}><WebView
-            source={{
-                html:html,
-                baseUrl: ''
-            }}/></View>);
+        xianshi=(<View
+            style={{
+                padding: 10
+            }}
+        >
+            <Modal
+                visible={this.state.modalVisible}
+                transparent={true}
+                onRequestClose={() => this.setState({modalVisible: false})}>
+                <ImageViewer imageUrls={images} index={this.state.index}/>
+            </Modal>
+        </View>);
         return  xianshi
     }
 }
