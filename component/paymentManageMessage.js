@@ -5,15 +5,8 @@ import {
     Text,
     View,
     Image,
-    Modal,
     TextInput,
-    TouchableHighlight,
-    ListView,
-    Alert,
-    AppRegistry,
-    TouchableWithoutFeedback,
-    SwipeableFlatList,
-    TouchableOpacity
+    TouchableOpacity, Alert
 } from 'react-native';
 import {createAppContainer,createStackNavigator} from 'react-navigation';
 import LoadingImage from "../component/loadingImage";
@@ -21,44 +14,19 @@ import Swipeout from 'react-native-swipeout'
 import PaymentInformation from '../component/paymentInformation'
 import BillingInformationDetails from '../component/billingInformationDetails'
 import PaymentContractUpdate from '../component/paymentContractUpdate'
-
-const CITY_NAMES = ['北京', '上海', '广州','杭州', '苏州'];
-const list = [
-    {
-        title: '合同编号',
-        r_icon:'chevron-right',
-    },
-    {
-        title: '合同名称',
-        r_icon:'chevron-right',
-    },
-]
+import PaymentInformationInsert from './paymentInformationAdd/paymentInformationAdd'
+import BillingInformationDetailsInsert from './billingInformationDetailsAdd/billingInformationDetailsAdd'
 
 class paymentManageMeg extends React.Component{
     constructor(props) {
         super(props)
         this.state = {
             refresh: false,
-            listData: []
+            listData: [],
+            paymentLists:[{'id':'123456','date':'2019-12-12'},{'id':'987542','date':'2019-12-11'},{'id':'542122','date':'2019-1-12'}],
+            drawerLists:[{'id':'JSDF15313845435135813815','date':'2019-12-12'},{'id':'RETR153138454SDASD5813815','date':'2019-12-11'},{'id':'KUHY15313845435135813815','date':'2019-1-12'}],
         }
     }
-
-    getNewData() {
-        this.setState({
-            refresh: true
-        })
-        let newData = []
-        for (let i = 0; i < 2; i++) {
-            newData.push('new data')
-        }
-        setTimeout(() => {
-            this.setState({
-                refresh: false,
-                listData: [...newData, ...this.state.listData]
-            })
-        }, 1500)
-    }
-
     componentDidMount() {
         this.getData()
     }
@@ -81,7 +49,7 @@ class paymentManageMeg extends React.Component{
                     <View style={{flexDirection:'row',justifyContent:'space-between'}}>
                         <View style={{marginTop:15,flexDirection:'row',}}>
                             <View style={{width:5,height:18,marginRight: 15,backgroundColor:'#2a9bff'}}/>
-                            <Text style={{color:"#393939"}}>基本信息</Text>
+                            <Text style={{color:"#393939"}}>合同信息</Text>
                         </View>
                         <TouchableOpacity
                             onPress={()=>this.props.navigation.navigate('PaymentContractUpdate')}
@@ -192,101 +160,140 @@ class paymentManageMeg extends React.Component{
                             <Text style={{color:"#393939"}}>付款信息</Text>
                         </View>
                     </View>
-                    <TouchableOpacity style={{marginTop:15,marginRight:'4%'}}>
+                    <TouchableOpacity style={{marginTop:15,marginRight:'4%'}}
+                                      onPress={() =>this.props.navigation.navigate('paymentInformationInsert')}>
                         <Image source={require('./static/images/tianjia.png')}
                                style={{height:20,width:20}}/>
                     </TouchableOpacity>
                 </View>
                     <View style={styles.basicInformation}>
-                        <Swipeout
-                            backgroundColor={'white'}
-                            right={swipeOut}>
-                            <TouchableOpacity onPress={() =>this.props.navigation.navigate('PaymentIn')}>
-                                <View style={styles.swipeOutS}>
-                                    <View style={styles.payList}>
-                                        <Image source={require('./static/images/付.png')}
-                                                style={styles.paymentImg}/>
-                                        <View style={styles.paymentNoBody}>
-                                            <Text style={styles.paymentNo}>NO:123456</Text>
-                                            <View style={styles.paymentDateBody}>
-                                                <Text style={styles.paymentDate}>2019-10-12</Text>
-                                            </View>
-                                        </View>
-                                    </View>
-                                    <View style={styles.rightArrowsBody}><Image  source={require('./static/images/右箭头.png')}
-                                                  style={styles.rightArrows}/>
-                                    </View>
-                                </View>
-                            </TouchableOpacity>
-                        </Swipeout>
-                        <View style={styles.detailsLine}/>
-                        <Swipeout
-                            backgroundColor={'white'}
-                            right={swipeOut}>
-                            <TouchableOpacity>
-                                <View style={styles.swipeOutS}>
-                                    <View style={styles.payList}>
-                                        <Image source={require('./static/images/付.png')}
-                                               style={styles.paymentImg}/>
-                                        <View style={styles.paymentNoBody}>
-                                            <Text style={styles.paymentNo}>NO:123456</Text>
-                                            <View style={styles.paymentDateBody}>
-                                                <Text style={styles.paymentDate}>2019-10-12</Text>
-                                            </View>
-                                        </View>
-                                    </View>
-                                    <View style={styles.rightArrowsBody}><Image  source={require('./static/images/右箭头.png')}
-                                                                                 style={styles.rightArrows}/>
-                                    </View>
-                                </View>
-                            </TouchableOpacity>
-                        </Swipeout>
-                        <View style={styles.detailsLine}/>
-                        <Swipeout
-                            backgroundColor={'white'}
-                            right={swipeOut}>
-                            <TouchableOpacity>
-                                <View style={styles.swipeOutS}>
-                                    <View style={styles.payList}>
-                                        <Image source={require('./static/images/付.png')}
-                                               style={styles.paymentImg}/>
-                                        <View style={styles.paymentNoBody}>
-                                            <Text style={styles.paymentNo}>NO:123456</Text>
-                                            <View style={styles.paymentDateBody}>
-                                                <Text style={styles.paymentDate}>2019-10-12</Text>
-                                            </View>
-                                        </View>
-                                    </View>
-                                    <View style={styles.rightArrowsBody}><Image  source={require('./static/images/右箭头.png')}
-                                                                                 style={styles.rightArrows}/>
-                                    </View>
-                                </View>
-                            </TouchableOpacity>
-                        </Swipeout>
+                        {
+                            this.paymentList()
+                        }
                     </View>
                     <View style={{flexDirection:'row',justifyContent:'space-between'}}>
                         <View style={{marginTop:15,flexDirection:'row',}}>
                             <View style={{width:5,height:18,marginRight: 15,backgroundColor:'#2a9bff'}}/>
                             <Text style={{color:"#393939"}}>开票信息</Text>
                         </View>
-                        <TouchableOpacity style={{marginTop:15,marginRight:'4%'}}>
+                        <TouchableOpacity style={{marginTop:15,marginRight:'4%'}}
+                                          onPress={() =>this.props.navigation.navigate('billingInformationDetailsInsert')}>
                             <Image source={require('./static/images/tianjia.png')}
                                    style={{height:20,width:20}}/>
                         </TouchableOpacity>
                     </View>
                 <View style={styles.basicInformation}>
+                    {
+                        this.drawerList()
+                    }
+                </View>
+            </ScrollView>
+            </View>
+        )
+    }
+    paymentList(){
+        var pages=[]
+        {this.state.paymentLists.map((key,i)=>{
+            pages.push(
+                <View>
                     <Swipeout
+                        autoClose={true}
                         backgroundColor={'white'}
-                        right={swipeOut}>
+                        right={[
+                            {
+                                text: '修改',
+                                backgroundColor:'#2a9bff'
+                            },
+                            {
+                                text: '删除',
+                                backgroundColor: '#eb4337',
+                                onPress: () => {
+                                    Alert.alert('请选择', '是否删除该该项?',
+                                        [
+                                            {
+                                                text: "确认",
+                                                onPress: async () => {
+                                                    let listData = this.state.paymentLists;
+                                                    listData.splice(i, 1)
+                                                    this.setState({
+                                                        paymentLists: listData
+                                                    })
+                                                }
+                                            },
+                                            {text: "取消"},
+                                        ]
+                                    );
+                                }
+                            }
+                        ]}
+                        key={i}>
+                        <TouchableOpacity key={i} onPress={() =>this.props.navigation.navigate('PaymentIn')}>
+                            <View style={styles.swipeOutS}>
+                                <View style={styles.payList}>
+                                    <Image source={require('./static/images/付.png')}
+                                           style={styles.paymentImg}/>
+                                    <View style={styles.paymentNoBody}>
+                                        <Text style={styles.paymentNo}>NO:{key.id}</Text>
+                                        <View style={styles.paymentDateBody}>
+                                            <Text style={styles.paymentDate}>{key.date}</Text>
+                                        </View>
+                                    </View>
+                                </View>
+                                <View style={styles.rightArrowsBody}><Image  source={require('./static/images/右箭头.png')}
+                                                                             style={styles.rightArrows}/>
+                                </View>
+                            </View>
+                        </TouchableOpacity>
+                    </Swipeout>
+                <View style={styles.detailsLine}/>
+            </View>);
+        })}
+        return pages
+    }
+    drawerList(){
+        var pages=[]
+        {this.state.drawerLists.map((key,i)=>{
+            pages.push (
+                <View>
+                    <Swipeout
+                        autoClose={true}
+                        backgroundColor={'white'}
+                        right={[
+                            {
+                                text: '修改',
+                                backgroundColor:'#2a9bff'
+                            },
+                            {
+                                text: '删除',
+                                backgroundColor: '#eb4337',
+                                onPress: () => {
+                                    Alert.alert('请选择', '是否删除该该项?',
+                                        [
+                                            {
+                                                text: "确认",
+                                                onPress: async () => {
+                                                    let listData = this.state.drawerLists;
+                                                    listData.splice(i, 1)
+                                                    this.setState({
+                                                        drawerLists: listData
+                                                    })
+                                                }
+                                            },
+                                            {text: "取消"},
+                                        ]
+                                    );
+                                }
+                            }
+                        ]}>
                         <TouchableOpacity onPress={() =>this.props.navigation.navigate('BillingInDetails')}>
                             <View style={styles.swipeOutS}>
                                 <View style={styles.payList}>
                                     <Image source={require('./static/images/票.png')}
                                            style={styles.invoiceImg}/>
                                     <View style={styles.paymentNoBody}>
-                                        <Text style={styles.paymentNo}>编号:JSDF2839754930680214</Text>
+                                        <Text style={styles.paymentNo}>编号:{key.id}</Text>
                                         <View style={styles.paymentDateBody}>
-                                            <Text style={styles.paymentDate}>2019-10-12</Text>
+                                            <Text style={styles.paymentDate}>{key.date}</Text>
                                         </View>
                                     </View>
                                 </View>
@@ -296,70 +303,27 @@ class paymentManageMeg extends React.Component{
                             </View>
                         </TouchableOpacity>
                     </Swipeout>
-                    <View style={styles.detailsLine}/>
-                    <Swipeout
-                        backgroundColor={'white'}
-                        right={swipeOut}>
-                        <TouchableOpacity>
-                            <View style={styles.swipeOutS}>
-                                <View style={styles.payList}>
-                                    <Image source={require('./static/images/票.png')}
-                                           style={styles.invoiceImg}/>
-                                    <View style={styles.paymentNoBody}>
-                                        <Text style={styles.paymentNo}>编号:JSDF2839754930680214</Text>
-                                        <View style={styles.paymentDateBody}>
-                                            <Text style={styles.paymentDate}>2019-10-12</Text>
-                                        </View>
-                                    </View>
-                                </View>
-                                <View style={styles.rightArrowsBody}><Image  source={require('./static/images/右箭头.png')}
-                                                                             style={styles.rightArrows}/>
-                                </View>
-                            </View>
-                        </TouchableOpacity>
-                    </Swipeout>
-                    <View style={styles.detailsLine}/>
-                    <Swipeout
-                        backgroundColor={'white'}
-                        right={swipeOut}>
-                        <TouchableOpacity>
-                            <View style={styles.swipeOutS}>
-                                <View style={styles.payList}>
-                                    <Image source={require('./static/images/票.png')}
-                                           style={styles.invoiceImg}/>
-                                    <View style={styles.paymentNoBody}>
-                                        <Text style={styles.paymentNo}>编号:JSDF2839754930680214</Text>
-                                        <View style={styles.paymentDateBody}>
-                                            <Text style={styles.paymentDate}>2019-10-12</Text>
-                                        </View>
-                                    </View>
-                                </View>
-                                <View style={styles.rightArrowsBody}><Image  source={require('./static/images/右箭头.png')}
-                                                                             style={styles.rightArrows}/>
-                                </View>
-                            </View>
-                        </TouchableOpacity>
-                    </Swipeout>
-                </View>
-            </ScrollView>
-            </View>
-        )
+                        <View style={styles.detailsLine}/></View>)
+                })}
+        return pages
     }
 }
-const swipeOut= [
-    {
-        text: '修改',
-        backgroundColor:'#2a9bff'
-    },
-    {
-        text: '删除',
-        backgroundColor:'#eb4337'
-    }
-]
 const App = createStackNavigator(
     {
         paymentManageMeg: {
             screen:paymentManageMeg,
+            navigationOptions: {  // 屏幕导航的默认选项, 也可以在组件内用 static navigationOptions 设置(会覆盖此处的设置)
+                header: null,  //隐藏导航栏
+            }
+        },
+        billingInformationDetailsInsert:{
+            screen:BillingInformationDetailsInsert,
+            navigationOptions: {  // 屏幕导航的默认选项, 也可以在组件内用 static navigationOptions 设置(会覆盖此处的设置)
+                header: null,  //隐藏导航栏
+            }
+        },
+        paymentInformationInsert: {
+            screen:PaymentInformationInsert,
             navigationOptions: {  // 屏幕导航的默认选项, 也可以在组件内用 static navigationOptions 设置(会覆盖此处的设置)
                 header: null,  //隐藏导航栏
             }

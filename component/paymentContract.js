@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import {createAppContainer,createStackNavigator,createSwitchNavigator} from 'react-navigation';
 import PaymentManageMessage from '../component/paymentManageMessage'
+import PaymentContractAdd from '../component/paymentContractAdd/paymentContractAdd'
 
 
 class panyment extends React.Component{
@@ -16,6 +17,18 @@ class panyment extends React.Component{
         return(
             <View style={{flex:1,backgroundColor:'#eeeeee'}}>
                 <ScrollView>
+                    <View style={{flexDirection:'row',justifyContent:'space-between'}}>
+                        <View style={{marginTop:15,flexDirection:'row',}}>
+                            <View style={{width:5,height:18,marginRight: 15,backgroundColor:'#2a9bff'}}/>
+                            <Text style={{color:"#393939"}}>合同列表</Text>
+                        </View>
+                        <TouchableOpacity
+                            onPress={()=>this.props.navigation.navigate('paymentContractInsert')}
+                            style={{marginTop:15,marginRight:'3%'}}>
+                            <Image source={require('./static/images/jia2.png')}
+                                   style={{height:20,width:20}}/>
+                        </TouchableOpacity>
+                    </View>
                     <TouchableOpacity
                         onPress={() =>this.props.navigation.navigate('paymentManageMsg')}>
                         <View style={styles.newContract}>
@@ -72,6 +85,22 @@ const App = createStackNavigator(
             screen:PaymentManageMessage,
             navigationOptions: {  // 屏幕导航的默认选项, 也可以在组件内用 static navigationOptions 设置(会覆盖此处的设置)
                 title: '付款合同详情',
+                headerStyle:{
+                    height:40,
+
+                },
+                headerTintColor:'#2A9BFF',
+                headerTitleStyle:{
+                    fontSize:15
+                },
+                gesturesEnabled: false,
+                gestures: null
+            }
+        },
+        paymentContractInsert:{
+            screen:PaymentContractAdd,
+            navigationOptions: {  // 屏幕导航的默认选项, 也可以在组件内用 static navigationOptions 设置(会覆盖此处的设置)
+                title: '付款合同添加',
                 headerStyle:{
                     height:40,
 

@@ -13,7 +13,7 @@ import {
 } from 'react-native';
 import ImagePicker from 'react-native-image-picker';
 import {createAppContainer, createStackNavigator} from "react-navigation";
-import ImageDetails from '../component/imageDetails/imageDetails'
+import ImageDetails from '../imageDetails/imageDetails'
 import {Button} from "react-native-elements";
 
 class CustomButton extends React.Component {
@@ -28,7 +28,7 @@ class CustomButton extends React.Component {
         );
     }
 }
- class paymentContractUp extends React.Component{
+class paymentInformationInsert extends React.Component{
     constructor(props) {
         super(props);
         this.state = {
@@ -50,31 +50,7 @@ class CustomButton extends React.Component {
                 <ScrollView>
                     <View style={{backgroundColor:'white',marginTop:10}}>
                         <View>
-                            <Text style={{marginLeft:'3%',fontSize:15,marginTop:10,marginBottom:10}}>合同编号：</Text>
-                            <View style={{marginLeft:'3%',marginRight:'3%',fontSize:15}}>
-                                <TextInput
-                                    placeholder="请输入合同编号"
-                                    editable={true}//是否可编辑
-                                    underlineColorAndroid='#E5E5E5'
-                                    style={{fontSize:14,height: 40}}
-                                    defaultValue='D1231541513515464'
-                                />
-                            </View>
-                        </View>
-                        <View>
-                            <Text style={{marginLeft:'3%',fontSize:15,marginTop:10,marginBottom:10}}>合同名称：</Text>
-                            <View style={{marginLeft:'3%',marginRight:'3%',fontSize:15}}>
-                                <TextInput
-                                    placeholder="请输入合同名称"
-                                    editable={true}//是否可编辑
-                                    underlineColorAndroid='#E5E5E5'
-                                    style={{fontSize:14,height: 40}}
-                                    defaultValue='劳动合同'
-                                />
-                            </View>
-                        </View>
-                        <View>
-                            <Text style={{marginLeft:'3%',fontSize:15,marginTop:10,marginBottom:10}}>甲方：</Text>
+                            <Text style={{marginLeft:'3%',fontSize:15,marginTop:10,marginBottom:10}}>经办人：</Text>
                             <View style={{marginLeft:'3%',marginRight:'3%',fontSize:15}}>
                                 <TextInput
                                     placeholder="请输入甲方名称"
@@ -86,7 +62,7 @@ class CustomButton extends React.Component {
                             </View>
                         </View>
                         <View>
-                            <Text style={{marginLeft:'3%',fontSize:15,marginTop:10,marginBottom:10}}>乙方：</Text>
+                            <Text style={{marginLeft:'3%',fontSize:15,marginTop:10,marginBottom:10}}>收款方：</Text>
                             <View style={{marginLeft:'3%',marginRight:'3%',fontSize:15}}>
                                 <TextInput
                                     placeholder="请输入乙方名称"
@@ -102,8 +78,8 @@ class CustomButton extends React.Component {
                         <View>
                             <Text style={{marginLeft:'3%',fontSize:15,marginTop:10,marginBottom:10}}>签订时间：</Text>
                             <CustomButton  text={this.state.presetText} onPress={this.showPicker.bind(this, 'preset', {date: this.state.presetDate})}>
-                            <View style={{marginLeft:'3%',marginRight:'3%',fontSize:15}}>
-                            </View>
+                                <View style={{marginLeft:'3%',marginRight:'3%',fontSize:15}}>
+                                </View>
                             </CustomButton>
                         </View>
                     </View>
@@ -117,7 +93,7 @@ class CustomButton extends React.Component {
                                     underlineColorAndroid='#E5E5E5'
                                     style={{fontSize:14,height: 40}}
                                     onChangeText={(text) => {
-                                       let newText = (text != '' && text.substr(0,1) == '.') ? '' : text;
+                                        let newText = (text != '' && text.substr(0,1) == '.') ? '' : text;
                                         /*newText = newText.replace(/[^\d.]/g,""); //清除"数字"和"."以外的字符
                                         //可以打印看看是否过滤掉了非数字
                                         console.log(newText)*/
@@ -162,19 +138,6 @@ class CustomButton extends React.Component {
                                 />
                             </View>
                         </View>
-                        <View>
-                            <Text style={{marginLeft:'3%',fontSize:15,marginTop:10,marginBottom:10}}>审核结算：</Text>
-                            <View style={{marginLeft:'3%',marginRight:'3%',fontSize:15}}>
-                                <TextInput
-                                    placeholder="请输入审核结算金额"
-                                    editable={true}//是否可编辑
-                                    underlineColorAndroid='#E5E5E5'
-                                    style={{fontSize:14,height: 40}}
-                                    defaultValue='12315.1235'
-                                />
-                            </View>
-                        </View>
-
                     </View>
                     <View style={{backgroundColor:'white',marginTop:10}}>
                         <View style={{flexDirection:'row',justifyContent:'space-between',marginTop:10,marginBottom:10}}>
@@ -203,7 +166,7 @@ class CustomButton extends React.Component {
 
                             <View style={styles.container}>
                                 <TouchableOpacity style={styles.item} onPress={this.selectPhotoTapped.bind(this)}>
-                                            <Image style={{width:120,height: 120}} source={require('../component/static/images/shangchuan.png')}></Image>
+                                    <Image style={{width:120,height: 120}} source={require('../static/images/shangchuan.png')}></Image>
                                 </TouchableOpacity>
                                 <View style={[styles.avatarContainer, {marginBottom: 30}]}>
                                     <ScrollView horizontal>
@@ -228,23 +191,23 @@ class CustomButton extends React.Component {
         )
     }
 
-     async showPicker(stateKey, options) {
-         try {
-             var newState = {};
-             var date = new Date();
-             const {action, year, month, day} = await DatePickerAndroid.open(options);
-             if (action === DatePickerAndroid.dismissedAction) {
+    async showPicker(stateKey, options) {
+        try {
+            var newState = {};
+            var date = new Date();
+            const {action, year, month, day} = await DatePickerAndroid.open(options);
+            if (action === DatePickerAndroid.dismissedAction) {
                 /* newState[stateKey + 'Text'] = date;*/
-             } else {
-                 var date = new Date(year, month, day);
-                 newState[stateKey + 'Text'] = date.toLocaleDateString();
-                 newState[stateKey + 'Date'] = date;
-             }
-             this.setState(newState);
-         } catch ({code, message}) {
-             console.warn(`Error in example '${stateKey}': `, message);
-         }
-     }
+            } else {
+                var date = new Date(year, month, day);
+                newState[stateKey + 'Text'] = date.toLocaleDateString();
+                newState[stateKey + 'Date'] = date;
+            }
+            this.setState(newState);
+        } catch ({code, message}) {
+            console.warn(`Error in example '${stateKey}': `, message);
+        }
+    }
     /*state = {
         avatarSource: [],
         array:[],
@@ -252,14 +215,14 @@ class CustomButton extends React.Component {
         i:0,
 
     };*/
-     formateDate(date) {
-         var year = date.getFullYear() ;
-         var month = date.getMonth() +1 ;
-         var day = date.getDate() ;
-         var formatedStr = year + '/' + month +'/' + day ;
-         // console.log('formatedStr: ' + formatedStr ) ;
-         return formatedStr ;
-     }
+    formateDate(date) {
+        var year = date.getFullYear() ;
+        var month = date.getMonth() +1 ;
+        var day = date.getDate() ;
+        var formatedStr = year + '/' + month +'/' + day ;
+        // console.log('formatedStr: ' + formatedStr ) ;
+        return formatedStr ;
+    }
     //选择图片
     selectPhotoTapped() {
         const options = {
@@ -314,23 +277,23 @@ class CustomButton extends React.Component {
     }
 
     //删除方法
-     longPress(i){
-         Alert.alert('请选择','是否删除该图片?',
-             [
-                 {
-                     text: "确认",
-                     onPress:async()=>{
-                         let listData = this.state.avatarSource;
-                         listData.splice(i,1)
-                         this.setState({
-                             avatarSource:listData
-                         })
-                     }
-                 },
-                 {text:"取消"},
-             ]
-         );
-     }
+    longPress(i){
+        Alert.alert('请选择','是否删除该图片?',
+            [
+                {
+                    text: "确认",
+                    onPress:async()=>{
+                        let listData = this.state.avatarSource;
+                        listData.splice(i,1)
+                        this.setState({
+                            avatarSource:listData
+                        })
+                    }
+                },
+                {text:"取消"},
+            ]
+        );
+    }
     state = {
         index: 0,
         modalVisible: true
@@ -339,8 +302,8 @@ class CustomButton extends React.Component {
 
 const App = createStackNavigator(
     {
-        paymentContractUp: {
-            screen:paymentContractUp,
+        paymentInformationInsert: {
+            screen:paymentInformationInsert,
             navigationOptions: {  // 屏幕导航的默认选项, 也可以在组件内用 static navigationOptions 设置(会覆盖此处的设置)
                 header: null,  //隐藏导航栏
             }
@@ -352,11 +315,11 @@ const App = createStackNavigator(
             }
         }
     },{
-        initialRouteName: 'paymentContractUp',
+        initialRouteName: 'paymentInformationInsert',
     });
 
 const AppContainer = createAppContainer(App);
-export default class paymentContractUpdate extends React.Component {
+export default class paymentInformationAdd extends React.Component {
     render() {
         return <AppContainer />;
     }

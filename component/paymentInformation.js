@@ -1,12 +1,8 @@
 import React from 'react';
 import {
-    StyleSheet,
     Text,
     View,
-    TouchableOpacity,
-    ListView,
-    SectionList,
-    Alert,Dimensions,
+    Dimensions,
     Image, TextInput,ScrollView
 } from 'react-native';
 var {width,height} = Dimensions.get("window");//第一种写法
