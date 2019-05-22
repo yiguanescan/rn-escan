@@ -23,6 +23,7 @@ import PaymentInformation from "./paymentInformation";
 import BillingInformationDetails from "./billingInformationDetails";
 import LoadingImage from "./loadingImage";
 import ImageDetails from '../component/imageDetails/imageDetails'
+import {Button} from "react-native-elements";
 
 var {width,height} = Dimensions.get("window");//第一种写法
 var name =["1","2","3"]
@@ -222,10 +223,19 @@ class CustomButton extends React.Component {
                                             this.selectPhoto()
                                         }
                                     </ScrollView>
-                                    </View>
+                                </View>
                             </View>
-
+                            <View style={{marginBottom: 30}}>
+                                <TouchableOpacity >
+                                    <Button
+                                        title="保&nbsp;&nbsp;&nbsp;&nbsp;存"
+                                        buttonStyle={{borderRadius:5, height:50,width:'94%',justifyContent:'center' , alignItems:'center',marginLeft:'3%', marginTop: 15}}
+                                    />
+                                </TouchableOpacity>
+                            </View>
                         </View>
+
+
                     </View>
                 </ScrollView>
             </View>
