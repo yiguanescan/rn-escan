@@ -26,6 +26,7 @@ import ImageDetails from '../component/imageDetails/imageDetails'
 
 var {width,height} = Dimensions.get("window");//第一种写法
 var name =["1","2","3"]
+
 class CustomButton extends React.Component {
     render() {
         return (
@@ -50,6 +51,7 @@ class CustomButton extends React.Component {
             i:0,
             presetDate: new Date(),
             presetText: this.formateDate(new Date()),
+            uri:''
         }
     }
 
@@ -216,16 +218,7 @@ class CustomButton extends React.Component {
                                 </TouchableOpacity>
                                 <View style={[styles.avatarContainer, {marginBottom: 30}]}>
                                     <ScrollView horizontal>
-                                       {/* <TouchableOpacity onLongPress={()=>this.longPress()}>
-                                            <Text>{name[0]}</Text>
-                                        </TouchableOpacity>
-                                        <TouchableOpacity onLongPress={()=>this.longPress()}>
-                                            <Text>{name[1]}</Text>
-                                        </TouchableOpacity>
-                                        <TouchableOpacity onLongPress={()=>this.longPress()}>
-                                            <Text>{name[2]}</Text>
-                                        </TouchableOpacity>*/}
-                                            {
+                                        {
                                             this.selectPhoto()
                                         }
                                     </ScrollView>
@@ -307,65 +300,40 @@ class CustomButton extends React.Component {
             }
             else {
                 let source = { uri: response.uri };
-                let arr = response.uri
+                this.state.avatarSource.push([source])
                 this.setState({
-                    array:[arr],
-                    avatarSource: [source]
-
                 });
-                console.log(this.state.avatarSource.length)
             }
         });
 
     }
     selectPhoto(){
-        let images = this.state.avatarSource;
-        let img = this.state.array;
-        if(flug){
-            flug=false
-            return pages
-        }else{
-            pages.push( <TouchableOpacity onLongPress={()=>this.longPress()} key={images.index}  onPress={()=>this.props.navigation.navigate('imageDetails',{imgUrl: {img}})}>
-                <Image style={styles.avatar} source={images} />
+        var pages=[]
+        {this.state.avatarSource.map((key,i)=>{
+            pages.push( <TouchableOpacity key={i} onLongPress={()=>this.longPress(i)} onPress={()=>this.props.navigation.navigate('imageDetails',{imgUrl: {key}})}>
+                <Image style={styles.avatar} key={i} source={key} />
             </TouchableOpacity>);
-        }
+        })}
         return pages
     }
 
     //删除方法
-     longPress(){
-       /* let count = 0;
-        for(let j=0;j<this.state.array.length;j++){
-            console.log(img[0]+"---"+this.state.array[j]+"---"+this.state.array.length)
-            if(img[0] == this.state.array[j]){
-                count=j
-            }
-        }*/
-       console.log(this.state.avatarSource.length+"=="+JSON.stringify(this.state.avatarSource)+"=="+this.state.avatarSource[0])
-         console.log(JSON.stringify(this.state.avatarSource[0])+"=="+this.state.avatarSource.index)
-         Alert.alert('请选择','是否删除该图片'+this.state.avatarSource.length,
+     longPress(i){
+         Alert.alert('请选择','是否删除该图片?',
              [
                  {
                      text: "确认",
-                     onPress:this.onselect()
+                     onPress:async()=>{
+                         let listData = this.state.avatarSource;
+                         listData.splice(i,1)
+                         this.setState({
+                             avatarSource:listData
+                         })
+                     }
                  },
                  {text:"取消"},
              ]
          );
-     }
-     onselect(){
-         alert('123')
-         let a = this.state.avatarSource
-            delete a[0]
-         this.setState({
-            avatarSource:[]
-         })
-         console.log(JSON.stringify(this.state.avatarSource[0]))
-         /*let arr = this.state.avatarSource
-                         arr.splice(0,1)
-                        this.setState({
-                            avatarSource:this.state.avatarSource
-                        })*/
      }
     state = {
         index: 0,
@@ -397,9 +365,7 @@ export default class paymentContractUpdate extends React.Component {
         return <AppContainer />;
     }
 }
-var xianshi=null;
-var flug=true
-var pages=[]
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,

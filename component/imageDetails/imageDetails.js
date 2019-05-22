@@ -21,9 +21,9 @@ export default class imageDetails extends PureComponent {
         //通过navigation.getParam来获取传递过来的参数
         const itemId = navigation.getParam('imgUrl', 'no-values');
         let ImageObjArray = [];
-        for (let i = 0; i < itemId.img.length; i++) {
+        for (let i = 0; i < itemId.key.length; i++) {
             let Obj = {};
-            Obj.url = itemId.img[i];
+            Obj.url = itemId.key[i].uri;
             this.state.index=i
             ImageObjArray.push(Obj)
         }
