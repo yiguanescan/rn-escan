@@ -10,7 +10,7 @@ export default class pact extends React.Component{
     render(){
         return(
             <View>
-                <Text>客户管理</Text>
+                <Text>收款开票1</Text>
             </View>
         )
     }

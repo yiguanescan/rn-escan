@@ -6,13 +6,13 @@ import {
     Image} from 'react-native';
 import ScrollableTabView,{ScrollableTabBar} from 'react-native-scrollable-tab-view'
 import PayContract from '../component/paymentContract'
-import PaymentDrawer from '../component/paymentDrawer'
-import PaymentManage from '../component/paymentManage'
-import GatContract from '../component/gatheringContract'
-import GatheringDrawer from '../component/gatheringDrawer'
-import GatheringManage from '../component/gatheringManage'
-import ClientManage from '../component/clientManage'
-import Linkman from '../component/linkman'
+import PaymentDrawer from '../component/paymentDrawer/paymentDrawer'
+import PaymentManage from '../component/paymentManage/paymentManage'
+import GatContract from '../component/gatheringContract/gatheringContract'
+import GatheringDrawer from '../component/gatheringDrawer/gatheringDrawer'
+import GatheringManage from '../component/gatheringManage/gatheringManage'
+import ClientManage from '../component/clientManage/clientManage'
+import Linkman from '../component/linkman/linkman'
 
 export default class pact extends React.Component{
     render(){

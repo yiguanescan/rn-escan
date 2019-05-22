@@ -234,8 +234,6 @@ class CustomButton extends React.Component {
                                 </TouchableOpacity>
                             </View>
                         </View>
-
-
                     </View>
                 </ScrollView>
             </View>
