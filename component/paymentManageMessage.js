@@ -16,6 +16,8 @@ import BillingInformationDetails from '../component/billingInformationDetails'
 import PaymentContractUpdate from '../component/paymentContractUpdate'
 import PaymentInformationInsert from './paymentInformationAdd/paymentInformationAdd'
 import BillingInformationDetailsInsert from './billingInformationDetailsAdd/billingInformationDetailsAdd'
+import PaymentInformationUpdate from './paymentInformationUpdate/paymentInformationUpdate'
+import CompactDrawerUpdate from './compactDrawerUpdate/compactDrawerUpdate'
 
 class paymentManageMeg extends React.Component{
     constructor(props) {
@@ -171,6 +173,10 @@ class paymentManageMeg extends React.Component{
                             this.paymentList()
                         }
                     </View>
+                    <View style={{marginLeft:'4%',marginRight:'4%',justifyContent:'space-between',flexDirection:'row'}}>
+                    <Text style={{color:"#ff615d"}}>累计付款金额：5000.00</Text>
+                    <Text style={{color:"#ff615d"}}>应付未付款：5000.00</Text>
+                </View>
                     <View style={{flexDirection:'row',justifyContent:'space-between'}}>
                         <View style={{marginTop:15,flexDirection:'row',}}>
                             <View style={{width:5,height:18,marginRight: 15,backgroundColor:'#2a9bff'}}/>
@@ -187,6 +193,10 @@ class paymentManageMeg extends React.Component{
                         this.drawerList()
                     }
                 </View>
+                <View style={{marginLeft:'4%',marginBottom:10,marginRight:'4%',justifyContent:'space-between',flexDirection:'row'}}>
+                    <Text style={{color:"#ff615d"}}>累计付款金额：5000.00</Text>
+                    <Text style={{color:"#ff615d"}}>应付未付款：5000.00</Text>
+                </View>
             </ScrollView>
             </View>
         )
@@ -202,7 +212,10 @@ class paymentManageMeg extends React.Component{
                         right={[
                             {
                                 text: '修改',
-                                backgroundColor:'#2a9bff'
+                                backgroundColor:'#2a9bff',
+                                onPress:()=>{
+                                    this.props.navigation.navigate('PaymentInformationUpdate')
+                                }
                             },
                             {
                                 text: '删除',
@@ -261,7 +274,10 @@ class paymentManageMeg extends React.Component{
                         right={[
                             {
                                 text: '修改',
-                                backgroundColor:'#2a9bff'
+                                backgroundColor:'#2a9bff',
+                                onPress:()=>{
+                                    this.props.navigation.navigate('CompactDrawerUpdate')
+                                }
                             },
                             {
                                 text: '删除',
@@ -335,8 +351,20 @@ const App = createStackNavigator(
                 header: null,  //隐藏导航栏
             }
         },
+        PaymentInformationUpdate:{
+            screen:PaymentInformationUpdate,
+            navigationOptions: {  // 屏幕导航的默认选项, 也可以在组件内用 static navigationOptions 设置(会覆盖此处的设置)
+                header: null,  //隐藏导航栏
+            }
+        },
         PaymentContractUpdate:{
             screen:PaymentContractUpdate,
+            navigationOptions: {  // 屏幕导航的默认选项, 也可以在组件内用 static navigationOptions 设置(会覆盖此处的设置)
+                header: null,  //隐藏导航栏
+            }
+        },
+        CompactDrawerUpdate:{
+            screen:CompactDrawerUpdate,
             navigationOptions: {  // 屏幕导航的默认选项, 也可以在组件内用 static navigationOptions 设置(会覆盖此处的设置)
                 header: null,  //隐藏导航栏
             }
