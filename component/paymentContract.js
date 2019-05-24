@@ -6,6 +6,7 @@ import {
     View,
     Image,
     TouchableOpacity,
+    Alert
 } from 'react-native';
 import {createAppContainer,createStackNavigator,createSwitchNavigator} from 'react-navigation';
 import PaymentManageMessage from '../component/paymentManageMessage'
@@ -13,6 +14,12 @@ import PaymentContractAdd from '../component/paymentContractAdd/paymentContractA
 
 
 class panyment extends React.Component{
+    constructor(props){
+        super(props);
+        this.state = {
+            lists:[{'id':'合同编号1','name':'合同名称1','date':'2019-12-03','money':'32.65'},{'id':'合同编号2','name':'合同名称2','date':'2019-1-03','money':'54.65'}]
+        }
+    }
     render(){
         return(
             <View style={{flex:1,backgroundColor:'#eeeeee'}}>
@@ -29,54 +36,64 @@ class panyment extends React.Component{
                                    style={{height:20,width:20}}/>
                         </TouchableOpacity>
                     </View>
+                    {
+                        this.showList()
+                    }
+                </ScrollView>
+            </View>
+        )
+    }
+    showList(){
+        var pages = []
+        {
+            this.state.lists.map((key,i)=>{
+                pages.push(
                     <TouchableOpacity
+                        key={i}
+                        onLongPress={()=>this.longPress(i)}
                         onPress={() =>this.props.navigation.navigate('paymentManageMsg')}>
                         <View style={styles.newContract}>
                             <View style={styles.contract}>
                                 <Text style={styles.company}>
-                                    合同名称
+                                    {key.name}
                                 </Text>
                                 <View style={styles.companyState}>
                                     <Text style={{color:'#ba3025'}}>
-                                        $32.25
+                                        ${key.money}
                                     </Text>
                                 </View>
                             </View>
                             <View style={styles.details}>
                                 <Text style={styles.dataName}>
-                                    编号
+                                    {key.id}
                                 </Text>
                                 <Text style={styles.dataDate}>
-                                    2019/2/23
+                                    {key.date}
                                 </Text>
                             </View>
                         </View>
                     </TouchableOpacity>
-                    <TouchableOpacity>
-                        <View style={styles.newContract}>
-                            <View style={styles.contract}>
-                                <Text style={styles.company}>
-                                    合同名称
-                                </Text>
-                                <View style={styles.companyState}>
-                                    <Text style={{color:'#ba3025'}}>
-                                        $32.25
-                                    </Text>
-                                </View>
-                            </View>
-                            <View style={styles.details}>
-                                <Text style={styles.dataName}>
-                                    编号
-                                </Text>
-                                <Text style={styles.dataDate}>
-                                    2019/2/23
-                                </Text>
-                            </View>
-                        </View>
-                    </TouchableOpacity>
-                </ScrollView>
-            </View>
-        )
+                )
+            })
+        }
+        return pages
+    }
+    longPress(i){
+        Alert.alert('请选择','确认是否删除？',
+            [
+                {
+                    text:'确认',
+                    onPress:async()=>{
+                        let listData = this.state.lists;
+                        listData.splice(i,1)
+                        this.setState({
+                            lists:listData
+                        })
+                    }
+                },{
+                    text: '取消'
+            }
+            ])
     }
 }
 const App = createStackNavigator(
