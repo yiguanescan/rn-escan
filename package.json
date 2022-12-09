@@ -9,7 +9,7 @@
   "dependencies": {
     "@material-ui/core": "^3.9.3",
     "@material-ui/icons": "^3.0.2",
-    "express": "^4.16.4",
+    "express": "^4.17.3",
     "react": "16.8.3",
     "react-native": "0.59.5",
     "react-native-deprecated-custom-components": "^0.1.2",
